@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.textField {
+  width: 500px;
+
+  & > * {
+    color: white !important;
+    border-color: white;
+  }
+}

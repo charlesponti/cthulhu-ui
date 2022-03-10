@@ -1,0 +1,17 @@
+.container {
+  margin-top: 1rem;
+  padding: 1rem 0 1rem 1rem;
+  
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 1px 9px violet;
+  }
+}
+
+.movieTitle {
+  display: inline-block;
+}
+
+.movieYear {
+  color: grey;
+}

@@ -1,0 +1,37 @@
+$headerImageSize: 35px;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  max-width: 36rem;
+  padding: 0 1rem;
+  margin: 1rem auto 6rem;
+  max-height: 1000px;
+}
+
+.header {
+  display: flex;
+  border-radius: 9px;
+  padding: 1rem 0.5rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.headerImage {
+  width: $headerImageSize;
+  height: $headerImageSize;
+  margin-right: 10px;
+  margin-top: 5px;
+  border-radius: 50%;
+}
+
+.headeText {
+  margin: 1.5rem;
+  font-size: 35px;
+  color: white;
+}
+
+.backToHome {
+  margin: 3rem 0 0;
+}

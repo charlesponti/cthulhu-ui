@@ -1,0 +1,31 @@
+.formControl {
+  width: 90%;
+  margin-bottom: 1rem !important;
+}
+
+.header {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+
+.afterTaxContainer {
+  display: flex;
+  justify-content: center;
+
+  h5 {
+    font-weight: bolder;
+    width: 25%
+  }
+
+  p {
+    width: 25%
+  }
+  
+  margin-bottom: 1rem;
+}
+
+.afterTaxIncome {
+  color: green;
+  margin-left: 0.5rem;
+}

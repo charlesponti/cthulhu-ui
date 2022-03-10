@@ -1,0 +1,29 @@
+$expense-color: red;
+$income-color: #028003;
+
+.expenseAmount {
+  color: $expense-color;
+}
+  
+
+.expenseListItem {
+  box-shadow: $expense-color 0px 2px 6px 0px;
+}
+
+.incomeAmount {
+  color: $income-color;
+}
+
+.incomeListItem {
+  box-shadow: $income-color 0px 2px 6px 0px
+}
+
+.transactionDetails {
+  color: grey;
+  font-size: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  span {
+    width: 25%
+  }
+}
