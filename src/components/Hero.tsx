@@ -10,11 +10,11 @@ const Subtitle = styled.p`
 const Hero = () => (
   <div className="text-center hero my-5">
     <Emoji kind="rocket" size="big">
-      🚀
+      💁‍♀️
     </Emoji>
-    <h1 className="mb-4">Hominem</h1>
+    <h1 className="mb-4">Ponti Fullstack</h1>
 
-    <Subtitle>All Your Personal Data. Yours.</Subtitle>
+    <Subtitle>A boilerplate for professional apps.</Subtitle>
   </div>
 );
 

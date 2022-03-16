@@ -11,6 +11,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+
 import api from '../../services/api';
 import * as authService from '../../services/auth';
 import FeedbackBlock from '../../components/FeedbackBlock';
@@ -40,11 +41,11 @@ const FieldErrorText = styled.span`
   color: ${(props) => props.theme.palette.error.main};
 `;
 
-const SignUpSchema = Yup.object().shape({
+const LoginSchema = Yup.object().shape({
   email: Yup.string().email()
 });
 
-function SignUp({ setCurrentEmail }: InferProps<typeof SignUp.propTypes>) {
+function Login({ setCurrentEmail }: InferProps<typeof Login.propTypes>) {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const initialValues = useMemo(
@@ -76,7 +77,7 @@ function SignUp({ setCurrentEmail }: InferProps<typeof SignUp.propTypes>) {
             }
           />
           {error && <FeedbackBlock>There was a problem! Try again, homie. </FeedbackBlock>}
-          <Formik validationSchema={SignUpSchema} initialValues={initialValues} onSubmit={onSubmit}>
+          <Formik validationSchema={LoginSchema} initialValues={initialValues} onSubmit={onSubmit}>
             {({ errors }) => (
               <Form>
                 <FormControl fullWidth margin="normal" error={!!errors.email}>
@@ -98,7 +99,7 @@ function SignUp({ setCurrentEmail }: InferProps<typeof SignUp.propTypes>) {
   );
 }
 
-SignUp.propTypes = {
+Login.propTypes = {
   setCurrentEmail: PropTypes.func.isRequired
 };
 
@@ -106,4 +107,4 @@ const mapDispatchToProps = {
   setCurrentEmail: authService.setCurrentEmail
 };
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(null, mapDispatchToProps)(Login);

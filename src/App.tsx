@@ -1,21 +1,20 @@
+import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
+import { FC } from 'react';
+import { connect } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
 import Home from './scenes/Home';
 import Authenticate from './scenes/Authenticate';
-import SignUp from './scenes/SignUp';
+import Login from './scenes/Login';
 import Profile from './scenes/Profile';
-import Accounts from './scenes/accounts';
 
 import NavBar from './components/NavBar';
 import NotFound from './scenes/NotFound';
-import { connect } from 'react-redux';
 import { useProfile } from './services/hooks';
-import { CircularProgress } from '@mui/material';
 import { userPropType } from './services/utils/propTypes';
 import { authSelectors } from './services/auth';
 import { RootState } from './services/store';
-import { FC } from 'react';
 
 function App() {
   const { loading } = useProfile();
@@ -30,8 +29,7 @@ function App() {
       <Grid className="flex-grow-1 mt-5">
         <Routes>
           <Route path="authenticate" element={<Authenticate />} />
-          <Route path="login" element={<SignUp />} />
-          <Route path="accounts" element={<Accounts />} />
+          <Route path="login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />

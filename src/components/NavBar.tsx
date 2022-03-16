@@ -1,34 +1,33 @@
+import React, { useCallback } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
 import PropTypes, { InferProps } from 'prop-types';
-import { useCallback, useState } from 'react';
-import { NavLink as RouterNavLink, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import {
-  Collapse,
-  Container,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  Button,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownItem,
-  DropdownMenu
-} from 'reactstrap';
 import { connect } from 'react-redux';
-import { RootState } from '../services/store';
+import { useNavigate } from 'react-router-dom';
+
+import Emoji from '../components/Emoji';
 import { authSelectors, logout } from '../services/auth';
-import { faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
+import { RootState } from '../services/store';
 import { userPropType } from '../services/utils/propTypes';
 
-function NavBar({ user, logout }: InferProps<typeof NavBar.propTypes>) {
+const pages = ['Products', 'Pricing', 'Blog'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+function ResponsiveAppBar({ user, logout }: InferProps<typeof ResponsiveAppBar.propTypes>) {
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
   const isAuthenticated = !!user;
-  const toggle = () => setIsOpen(!isOpen);
   const onLoginClick = useCallback(() => {
     navigate('login');
   }, []);
@@ -38,98 +37,132 @@ function NavBar({ user, logout }: InferProps<typeof NavBar.propTypes>) {
     });
   }, []);
 
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   return (
-    <div className="nav-container">
-      <Navbar color="light" light expand="md">
-        <Container>
-          <NavbarBrand className="logo" />
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink tag={RouterNavLink} to="/">
-                  Home
-                </NavLink>
-              </NavItem>
-              {isAuthenticated && (
-                <NavItem>
-                  <NavLink tag={RouterNavLink} to="/transctions">
-                    Transactions
-                  </NavLink>
-                </NavItem>
-              )}
-            </Nav>
-            <Nav className="d-none d-md-block" navbar>
-              {!isAuthenticated && (
-                <NavItem>
-                  <Button
-                    id="qsLoginBtn"
-                    color="primary"
-                    className="btn-margin"
-                    onClick={onLoginClick}>
-                    Log in
-                  </Button>
-                </NavItem>
-              )}
-              {isAuthenticated && (
-                <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret id="profileDropDown">
-                    {user && user.avatar && (
-                      <img
-                        src={user.avatar}
-                        alt="Profile"
-                        className="nav-user-profile rounded-circle"
-                        width="50"
-                      />
-                    )}
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem header>{user?.email}</DropdownItem>
-                    <DropdownItem tag={RouterNavLink} to="/profile" className="dropdown-profile">
-                      <FontAwesomeIcon icon={faUser} className="mr-3" /> Profile
-                    </DropdownItem>
-                    <DropdownItem id="qsLogoutBtn" onClick={() => logoutWithRedirect()}>
-                      <FontAwesomeIcon icon={faPowerOff} className="mr-3" /> Log out
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              )}
-            </Nav>
-            {isAuthenticated && (
-              <Nav className="d-md-none justify-content-between" navbar style={{ minHeight: 170 }}>
-                <NavItem>
-                  <span className="user-info">
-                    {user?.avatar && (
-                      <img
-                        src={user?.avatar}
-                        alt="Profile"
-                        className="nav-user-profile d-inline-block rounded-circle mr-3"
-                        width="50"
-                      />
-                    )}
-                    <h6 className="d-inline-block">{user?.email}</h6>
-                  </span>
-                </NavItem>
-                <NavItem>
-                  <FontAwesomeIcon icon={faUser} className="mr-3" />
-                  <RouterNavLink to="/profile">Profile</RouterNavLink>
-                </NavItem>
-                <NavItem>
-                  <FontAwesomeIcon icon={faPowerOff} className="mr-3" />
-                  <RouterNavLink to="#" id="qsLogoutBtn" onClick={() => logoutWithRedirect()}>
-                    Log out
-                  </RouterNavLink>
-                </NavItem>
-              </Nav>
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
+            <Emoji kind="info-lady" size="md">
+              💁‍♀️
+            </Emoji>
+            App Name
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit">
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left'
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left'
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' }
+              }}>
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            LOGO
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}>
+                {page}
+              </Button>
+            ))}
+          </Box>
+
+          <Box sx={{ flexGrow: 0 }}>
+            {!isAuthenticated && (
+              <Button onClick={onLoginClick} sx={{ my: 2, color: 'white', display: 'block' }}>
+                Log in
+              </Button>
             )}
-          </Collapse>
-        </Container>
-      </Navbar>
-    </div>
+            {isAuthenticated && (
+              <>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}>
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </>
+            )}
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 }
 
-NavBar.propTypes = {
+ResponsiveAppBar.propTypes = {
   user: userPropType,
   logout: PropTypes.func.isRequired
 };
@@ -139,7 +172,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = {
-  logout
+  logout: logout
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(ResponsiveAppBar);
