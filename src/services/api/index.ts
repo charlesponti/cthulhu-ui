@@ -1,14 +1,7 @@
 import axios from 'axios';
 
-const token = localStorage.getItem('token');
-
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL as string,
-  ...(token && {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
+  baseURL: import.meta.env.VITE_API_URL as string
 });
 
 // Check that api is up

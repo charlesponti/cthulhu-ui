@@ -13,10 +13,8 @@ export function getUser(): Promise<AxiosResponse<User>> {
 
 export function authenticate({ email, emailToken }: LoginPayload) {
   return api.post('/authenticate', { email, emailToken }).then((resp) => {
-    console.log(resp.data);
     const { authToken } = resp.data;
     api.defaults.headers.common.Authorization = `Bearer ${authToken}`;
-    localStorage.setItem('token', authToken);
   });
 }
 
