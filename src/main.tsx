@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@emotion/react';
-import React from 'react'; // eslint-disable-line
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query';
