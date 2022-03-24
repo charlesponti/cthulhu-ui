@@ -16,6 +16,8 @@ import { userPropType } from './services/utils/propTypes';
 import { authSelectors } from './services/auth';
 import { RootState } from './services/store';
 
+import styles from './App.module.css';
+
 function App() {
   const { loading } = useProfile();
 
@@ -26,7 +28,7 @@ function App() {
   return (
     <div id="app" className="d-flex flex-column h-100">
       <NavBar />
-      <Grid className="flex-grow-1 mt-5">
+      <Grid className={styles.wrap}>
         <Routes>
           <Route path="authenticate" element={<Authenticate />} />
           <Route path="login" element={<Login />} />

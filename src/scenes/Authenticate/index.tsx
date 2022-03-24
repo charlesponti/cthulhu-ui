@@ -16,18 +16,14 @@ import { RootState, store } from '../../services/store';
 import { authenticateAsync, authSelectors, setCurrentEmail } from '../../services/auth';
 import FeedbackBlock from '../../components/FeedbackBlock';
 
+import styles from './Authenticate.module.css';
+
 const AuthenticateSchema = Yup.object().shape({
   emailToken: Yup.string().length(8)
 });
 
-const Wrap = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 const StyledCard = styled(Card)`
-  min-width: 350px;
-  max-width: 500px;
+  width: 350px;
   padding: 24px;
 `;
 
@@ -71,7 +67,7 @@ function Authenticate({
 
   return (
     loginEmail && (
-      <Wrap>
+      <div className={styles.wrap}>
         <StyledCard>
           <CardContent>
             <StyledCardHeader
@@ -100,7 +96,7 @@ function Authenticate({
             </Formik>
           </CardContent>
         </StyledCard>
-      </Wrap>
+      </div>
     )
   );
 }

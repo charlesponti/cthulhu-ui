@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import Home from '../Home';
+import Home from '.';
 
 it('renders', () => {
   const div = document.createElement('div');

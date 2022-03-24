@@ -2,9 +2,9 @@ import Grid from '@mui/material/Grid';
 import { InferProps } from 'prop-types';
 import { connect } from 'react-redux';
 
-import { authSelectors } from '../services/auth';
-import { RootState } from '../services/store';
-import { userPropType } from '../services/utils/propTypes';
+import { authSelectors } from '../../services/auth';
+import { RootState } from '../../services/store';
+import { userPropType } from '../../services/utils/propTypes';
 
 function Profile({ user }: InferProps<typeof Profile.propTypes>) {
   if (!user) {

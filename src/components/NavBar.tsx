@@ -32,9 +32,7 @@ function ResponsiveAppBar({ user, logout }: InferProps<typeof ResponsiveAppBar.p
     navigate('login');
   }, []);
   const logoutWithRedirect = useCallback(() => {
-    logout({
-      returnTo: window.location.origin
-    });
+    logout();
   }, []);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -129,7 +127,7 @@ function ResponsiveAppBar({ user, logout }: InferProps<typeof ResponsiveAppBar.p
               <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <Avatar alt={user.email} />
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -152,6 +150,9 @@ function ResponsiveAppBar({ user, logout }: InferProps<typeof ResponsiveAppBar.p
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                   ))}
+                  <MenuItem onClick={logout}>
+                    <Typography textAlign="center">Log out</Typography>
+                  </MenuItem>
                 </Menu>
               </>
             )}

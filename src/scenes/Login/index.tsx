@@ -16,14 +16,11 @@ import api from '../../services/api';
 import * as authService from '../../services/auth';
 import FeedbackBlock from '../../components/FeedbackBlock';
 
-const Wrap = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+import styles from './Login.module.css';
 
 const StyledCard = styled(Card)`
-  min-width: 350px;
-  max-width: 500px;
+  width: 350px;
+  margin: 0 auto;
   padding: 24px;
 `;
 
@@ -57,7 +54,7 @@ function Login({ setCurrentEmail }: InferProps<typeof Login.propTypes>) {
 
   const onSubmit = useCallback(async ({ email }) => {
     try {
-      await api.post('/login', { email });
+      await api.post('/login', { email }, { withCredentials: false });
       setCurrentEmail(email);
       navigate('/authenticate');
     } catch (err) {
@@ -66,7 +63,7 @@ function Login({ setCurrentEmail }: InferProps<typeof Login.propTypes>) {
   }, []);
 
   return (
-    <Wrap>
+    <div className={styles.wrap}>
       <StyledCard>
         <CardContent>
           <StyledCardHeader
@@ -95,7 +92,7 @@ function Login({ setCurrentEmail }: InferProps<typeof Login.propTypes>) {
           </Formik>
         </CardContent>
       </StyledCard>
-    </Wrap>
+    </div>
   );
 }
 
