@@ -12,14 +12,9 @@ export function getUser(): Promise<AxiosResponse<User>> {
 }
 
 export function authenticate({ email, emailToken }: LoginPayload) {
-  return api.post('/authenticate', { email, emailToken }).then((resp) => {
-    const { authToken } = resp.data;
-    api.defaults.headers.common.Authorization = `Bearer ${authToken}`;
-  });
+  return api.post('/authenticate', { email, emailToken });
 }
 
 export function logout() {
-  return api.post('/logout').then(() => {
-    api.defaults.headers.common.Authorization = false;
-  });
+  return api.post('/logout', {});
 }
