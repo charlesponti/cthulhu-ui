@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import { store } from './services/store';
