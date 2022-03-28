@@ -4,17 +4,18 @@ import { FC } from 'react';
 import { connect } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
-import Home from './scenes/Home';
-import Authenticate from './scenes/Authenticate';
-import Login from './scenes/Login';
-import Profile from './scenes/Profile';
+import { authSelectors } from '../../services/auth';
+import { useProfile } from '../../services/hooks';
+import { RootState } from '../../services/store';
+import { userPropType } from '../../services/utils/propTypes';
 
-import NavBar from './components/NavBar';
-import NotFound from './scenes/NotFound';
-import { useProfile } from './services/hooks';
-import { userPropType } from './services/utils/propTypes';
-import { authSelectors } from './services/auth';
-import { RootState } from './services/store';
+import Authenticate from '../../scenes/Authenticate';
+import Home from '../../scenes/Home';
+import Login from '../../scenes/Login';
+import NotFound from '../../scenes/NotFound';
+import Profile from '../../scenes/Profile';
+
+import NavBar from '../NavBar';
 
 import styles from './App.module.css';
 

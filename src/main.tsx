@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import './index.css';
-import App from './App';
+import App from './components/App';
 import { store } from './services/store';
 import theme from './styles/theme';
 
