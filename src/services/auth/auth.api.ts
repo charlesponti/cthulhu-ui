@@ -16,5 +16,5 @@ export function authenticate({ email, emailToken }: LoginPayload) {
 }
 
 export function logout() {
-  return api.post('/logout', {});
+  return api.post('/logout', {}).then(() => window.location.reload());
 }
