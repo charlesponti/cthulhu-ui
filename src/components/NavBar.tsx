@@ -31,9 +31,6 @@ function ResponsiveAppBar({ user, logout }: InferProps<typeof ResponsiveAppBar.p
   const onLoginClick = useCallback(() => {
     navigate('login');
   }, []);
-  const logoutWithRedirect = useCallback(() => {
-    logout();
-  }, []);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
