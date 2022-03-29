@@ -15,15 +15,15 @@ import PropTypes, { InferProps } from 'prop-types';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import Emoji from '../components/Emoji';
-import { authSelectors, logout } from '../services/auth';
-import { RootState } from '../services/store';
-import { userPropType } from '../services/utils/propTypes';
+import Emoji from '../../../Emoji';
+import { authSelectors, logout } from '../../../../services/auth';
+import { RootState } from '../../../../services/store';
+import { userPropType } from '../../../../services/utils/propTypes';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function ResponsiveAppBar({ user, logout }: InferProps<typeof ResponsiveAppBar.propTypes>) {
+function Navbar({ user, logout }: InferProps<typeof Navbar.propTypes>) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
@@ -160,7 +160,7 @@ function ResponsiveAppBar({ user, logout }: InferProps<typeof ResponsiveAppBar.p
   );
 }
 
-ResponsiveAppBar.propTypes = {
+Navbar.propTypes = {
   user: userPropType,
   logout: PropTypes.func.isRequired
 };
@@ -170,7 +170,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = {
-  logout: logout
+  logout
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResponsiveAppBar);
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

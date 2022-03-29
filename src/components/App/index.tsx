@@ -15,7 +15,7 @@ import Login from '../../scenes/Login';
 import NotFound from '../../scenes/NotFound';
 import Profile from '../../scenes/Profile';
 
-import NavBar from '../NavBar';
+import NavBar from './components/Navbar';
 
 import styles from './App.module.css';
 
@@ -33,7 +33,7 @@ function App() {
         <Routes>
           <Route path="authenticate" element={<Authenticate />} />
           <Route path="login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

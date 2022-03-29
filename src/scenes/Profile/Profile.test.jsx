@@ -1,9 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { ProfileComponent } from '../Profile';
+import renderer from 'react-test-renderer';
+import { test, expect, vi } from 'vitest';
+import Profile from '.';
 
-jest.mock('@auth0/auth0-react', () => ({
-  useAuth0: jest.fn(() => ({
+vi.mock('@auth0/auth0-react', () => ({
+  useAuth0: vi.fn(() => ({
     loading: false,
     user: {
       name: 'Test user',
@@ -11,12 +12,12 @@ jest.mock('@auth0/auth0-react', () => ({
       picture: 'https://avatar.com'
     }
   })),
-  withAuthenticationRequired: jest.fn()
+  withAuthenticationRequired: vi.fn()
 }));
 
-describe('The profile component', () => {
-  it('renders when loading = true', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<ProfileComponent />, div);
+test('Profile', () => {
+  test('renders when loading = true', () => {
+    const div = renderer.create(<Profile />, div);
+    expect(div.toJSON()).toMatchSnapshot();
   });
 });

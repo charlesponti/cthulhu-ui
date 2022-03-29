@@ -1,7 +1,10 @@
-import ReactDOM from 'react-dom';
+import renderer from 'react-test-renderer';
+import { test, expect } from 'vitest';
 import Home from '.';
 
-it('renders', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Home />, div);
+test('Home', () => {
+  test('renders', () => {
+    const instance = renderer.create(<Home />);
+    expect(instance.toJSON()).toMatchSnapshot();
+  });
 });
